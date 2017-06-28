@@ -1,0 +1,13 @@
+[myServers]
+54.215.238.139
+
+[webservers]
+foo.example.com
+bar.example.com
+www[01:50].example.com
+
+[dbservers]
+one.example.com
+two.example.com
+three.example.com
+db-[a:f].example.com
