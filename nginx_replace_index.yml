@@ -1,0 +1,9 @@
+- hosts: myServers
+  become: yes
+
+  tasks:
+  - name: Replacing index.html in NGINX Plus
+    lineinfile:
+      path: /usr/share/nginx/html/index.html 
+      regexp: '^<h1>'
+      line: '<h1>This is another test'  
