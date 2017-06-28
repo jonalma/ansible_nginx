@@ -1,0 +1,14 @@
+- hosts: myServers
+  become: yes
+
+  tasks:
+  - name: Installing NGINX Plus
+    yum:
+        name: nginx
+        state: latest
+  
+  - name: Starting NGINX Plus
+    service:
+        name: nginx
+        state: started 
+      

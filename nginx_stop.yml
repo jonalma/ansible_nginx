@@ -1,0 +1,10 @@
+- hosts: myServers
+  become: yes
+
+  tasks:
+
+  - name: Stopping NGINX Plus
+    service:
+        name: nginx
+        state: stopped 
+      
