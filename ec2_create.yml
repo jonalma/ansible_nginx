@@ -15,6 +15,6 @@
       image: "{{ default_image }}"
       wait: yes 
       region: "{{ ec2_region }}" 
-      count: 3
+      count: 1
       vpc_subnet_id: "{{ ec2_subnet }}"
       assign_public_ip: yes 
