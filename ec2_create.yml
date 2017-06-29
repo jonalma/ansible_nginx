@@ -1,0 +1,20 @@
+- hosts: myServers
+  become: yes
+
+  tasks:
+   
+  - name: Including variables from files 
+    include_vars: creds.yml 
+  
+  - name: Launch a set of instances
+    ec2: 
+      aws_access_key: "{{ aws_ak }}"
+      aws_secret_key: "{{ aws_sk }}"
+      group: ec2-server
+      instance_type: t2.micro
+      image: "{{ default_image }}"
+      wait: yes 
+      region: "{{ ec2_region }}" 
+      count: 3
+      vpc_subnet_id: "{{ ec2_subnet }}"
+      assign_public_ip: yes 
