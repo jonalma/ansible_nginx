@@ -1,6 +1,8 @@
- - vars:
-    instance_count: 1 
-    main_nodes_ips: "{{ groups['myServers'] | map('extract', hostvars, ['ansible_ssh_host']) | join(',') }}"
+---
+- hosts: myServers
+  become: yes
+  vars:
+    instance_count: 3
 
   tasks:
    
@@ -39,14 +41,16 @@
 
 - hosts: myServers
   become: yes
+  vars: 
+    main_nodes_ips: "{{ groups['myServers'] | map('extract', hostvars, ['ansible_ssh_host']) | join(',') }}"
 
   tasks: 
-  - name: Installing NGINX 
+  - name: Installing NGINX on newly launched/existing hosts in group 
     yum:
       name: nginx
       state: latest
 
-  - name: Starting NGINX Plus
+  - name: Starting NGINX Plus on those hosts...
     service:
       name: nginx
       state: started
@@ -55,3 +59,4 @@
     debug: 
       msg: "{{ main_nodes_ips }}"
 
+...
