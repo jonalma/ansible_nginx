@@ -1,5 +1,7 @@
 - hosts: myServers
   become: yes
+  vars:
+    instance_count: 2 
 
   tasks:
    
@@ -15,6 +17,6 @@
       image: "{{ default_image }}"
       wait: yes 
       region: "{{ ec2_region }}" 
-      count: 1
+      count: "{{ instance_count }}"
       vpc_subnet_id: "{{ ec2_subnet }}"
       assign_public_ip: yes 
