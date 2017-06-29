@@ -2,7 +2,7 @@
 - hosts: myServers
   become: yes
   vars:
-    instance_count: 3
+    instance_count: 1
 
   tasks:
    
@@ -41,22 +41,6 @@
 
 - hosts: myServers
   become: yes
-  vars: 
-    main_nodes_ips: "{{ groups['myServers'] | map('extract', hostvars, ['ansible_ssh_host']) | join(',') }}"
-
-  tasks: 
-  - name: Installing NGINX on newly launched/existing hosts in group 
-    yum:
-      name: nginx
-      state: latest
-
-  - name: Starting NGINX Plus on those hosts...
-    service:
-      name: nginx
-      state: started
-
-  - name: Display IPs in group
-    debug: 
-      msg: "{{ main_nodes_ips }}"
-
+- include: nginx_install.yml
+ 
 ...
